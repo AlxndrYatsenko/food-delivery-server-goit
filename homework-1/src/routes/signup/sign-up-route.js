@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const qs = require("querystring");
 
 const saveUser = user => {
   const userName = user.username;
@@ -27,7 +26,7 @@ const signUpRoute = (req, res) => {
     });
 
     req.on("end", function() {
-			const post = qs.parse(body);
+			const post = JSON.parse(body);
       saveUser(post);
 			
       const response = { status: "success", user: post };
