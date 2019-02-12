@@ -19,16 +19,14 @@ const signUpRoute = (req, res) => {
   if (req.method === "POST") {
     let body = "";
 
-
     req.on("data", function(data) {
       body += data;
-
     });
 
     req.on("end", function() {
-			const post = JSON.parse(body);
+      const post = JSON.parse(body);
       saveUser(post);
-			
+
       const response = { status: "success", user: post };
 
       res.writeHead(200, { "Content-Type": "application/json" });
