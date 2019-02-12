@@ -9,6 +9,7 @@
     "creatorId": 1,
     "created": "21-08-2018",
     "modified": "21-08-2018",
+    "category": "pizza",
     "categories": ["pizza"]
   },
   {
@@ -33,7 +34,7 @@
     "creatorId": 1,
     "created": "07-02-19",
     "modified": "07-02-19",
-    "categories": ["main course"]
+    "categories": ["main"]
   },
   {
     "id": 19112834,
@@ -45,7 +46,7 @@
     "creatorId": 1,
     "created": "07-02-19",
     "modified": "07-02-19",
-    "categories": ["main course"]
+    "categories": ["main"]
   },
   {
     "id": 19112835,
