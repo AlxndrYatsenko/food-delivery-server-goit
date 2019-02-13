@@ -22,31 +22,26 @@ const productsRoute = (req, res) => {
 
       let responseData;
 
+      const ID = req.url.split("/")[2];
       // get id from url
-      const id = req.url.split("/")[2].includes("?")
-        ? null
-        : req.url.split("/")[2];
+      const id = ID.includes("?") ? null : ID;
 
-      // get query from url
       const { query } = url.parse(req.url, true);
 
       if (id) {
-        // get product by id
-        responseData = parsedData.filter(p => p.id.toString() === id) || [];
+        responseData = parsedData.filter(p => p.id.toString() === id) || []; // get product by id
       } else if (query) {
         const { ids, category } = query;
 
         let queryArr = [];
 
-        // get ids array from url
         if (ids) {
-          queryArr = ids.split(",").map(i => i.replace(/[^-0-9]/gim, ""));
+          queryArr = ids.split(",").map(i => i.replace(/[^-0-9]/gim, "")); // get ids array from url
           responseData = getProductsById(queryArr, parsedData);
         }
 
-        // get categories array from url
         if (category) {
-          queryArr = category.split(",").map(c => c.replace(/[^-a-z]/gim, ""));
+          queryArr = category.split(",").map(c => c.replace(/[^-a-z]/gim, "")); // get categories array from url
           responseData = getProductsByCategory(queryArr, parsedData);
         }
       }

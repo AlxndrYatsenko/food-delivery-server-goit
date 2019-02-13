@@ -22,8 +22,6 @@ const getProductsById = (queryArr, parsedData) => {
     .map(({ id, sku, name, description }) => {
       return { id, sku, name, description };
     });
-
-  // return productsArr;
 };
 
 module.exports = { getProductsByCategory, getProductsById };
