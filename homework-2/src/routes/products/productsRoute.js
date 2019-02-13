@@ -1,6 +1,7 @@
 const fs = require("fs");
 const url = require("url");
 const path = require("path");
+const { getProductsByCategory, getProductsById } = require("./helpers.js");
 
 const productsRoute = (req, res) => {
   const filePath = path.join(
@@ -22,57 +23,32 @@ const productsRoute = (req, res) => {
       let responseData;
 
       // get id from url
-      const id = Number(req.url.split("/")[2]);
+      const id = req.url.split("/")[2].includes("?")
+        ? null
+        : req.url.split("/")[2];
+
       // get query from url
       const { query } = url.parse(req.url, true);
+
       if (id) {
         // get product by id
-        responseData = parsedData.filter(p => p.id === id) || [];
+        responseData = parsedData.filter(p => p.id.toString() === id) || [];
       } else if (query) {
-        // get ids array from url
+        const { ids, category } = query;
 
         let queryArr = [];
 
-        if (query.ids) {
-          queryArr = query.ids
-            .split(",")
-            .map(i => Number(i.replace(/[^-0-9]/gim, "")));
+        // get ids array from url
+        if (ids) {
+          queryArr = ids.split(",").map(i => i.replace(/[^-0-9]/gim, ""));
+          responseData = getProductsById(queryArr, parsedData);
         }
 
-        if (query.category) {
-          queryArr.push(query.category.replace(/[^-a-z]/gim, ""));
+        // get categories array from url
+        if (category) {
+          queryArr = category.split(",").map(c => c.replace(/[^-a-z]/gim, ""));
+          responseData = getProductsByCategory(queryArr, parsedData);
         }
-
-        const filtredProducts = () => {
-          const arr = [];
-
-          if (query.category) {
-            queryArr.length > 0
-              ? queryArr.map(category =>
-                  parsedData.map(p =>
-                    p.categories.forEach(e =>
-                      e === category ? arr.push(p) : null
-                    )
-                  )
-                )
-              : [];
-          }
-
-          if (query.ids) {
-            queryArr.length > 0
-              ? queryArr.map(id =>
-                  parsedData.map(p => (p.id === id ? arr.push(p) : null))
-                )
-              : [];
-          }
-
-          return arr.length > 0
-            ? arr.map(({ id, sku, name, description }) => {
-                return { id, sku, name, description };
-              })
-            : [];
-        };
-        responseData = filtredProducts();
       }
 
       const response = { status: "success", products: responseData };

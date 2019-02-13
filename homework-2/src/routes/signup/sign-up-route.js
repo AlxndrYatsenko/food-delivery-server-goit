@@ -11,7 +11,7 @@ const saveUser = user => {
   );
 
   fs.writeFile(filePath, JSON.stringify(user), function(error) {
-    if (error) throw error; // если возникла ошибка
+    if (error) throw error;
   });
 };
 
