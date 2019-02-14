@@ -1,0 +1,26 @@
+{
+  "name": "food-delivery-server-goit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "debug": "node --inspect index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlxndrYatsenko/food-delivery-server-goit.git"
+  },
+  "author": "Alexander Yatsenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlxndrYatsenko/food-delivery-server-goit/issues"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.9",
+    "shortid": "^2.2.14"
+  }
+}
