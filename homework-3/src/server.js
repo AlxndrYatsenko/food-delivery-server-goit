@@ -10,7 +10,7 @@ const {
   updateProduct
 } = require("./routes/products/productRoute");
 // console.log(productRoute);
-const usersRoute = require("./routes/users/usersRoute");
+const { usersRoute, updateUser } = require("./routes/users/usersRoute");
 
 const startServer = port => {
   app
@@ -26,6 +26,7 @@ const startServer = port => {
     .post("/users", usersRoute)
 
     .put("/products/:id", updateProduct)
+    .put("/users/:id", updateUser)
 
     // .use("/", router)
     .use(logger)
