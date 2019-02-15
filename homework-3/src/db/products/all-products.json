@@ -37,18 +37,6 @@
     "categories": ["main"]
   },
   {
-    "id": 19112834,
-    "sku": 1120004,
-    "name": "Полента",
-    "description": "Полента (итал. polenta) — итальянское блюдо (каша) из кукурузной муки, аналог мамалыги.",
-    "price": "95",
-    "currency": "UAN",
-    "creatorId": 1,
-    "created": "07-02-19",
-    "modified": "07-02-19",
-    "categories": ["main"]
-  },
-  {
     "id": 19112835,
     "sku": 1120005,
     "name": "Тирамису",
@@ -83,5 +71,17 @@
     "created": "07-02-19",
     "modified": "07-02-19",
     "categories": ["soup"]
+  },
+  {
+    "id": 19112834,
+    "sku": 1120004,
+    "name": "Полента",
+    "description": "Полента (итал. polenta) — итальянское блюдо (каша) из кукурузной муки, аналог мамалыги.",
+    "price": "95",
+    "currency": "UAN",
+    "creatorId": 1,
+    "created": "07-02-19",
+    "modified": "15-02-2019",
+    "categories": ["main"]
   }
 ]

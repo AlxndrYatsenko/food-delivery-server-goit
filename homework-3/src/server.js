@@ -1,22 +1,31 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-// const { Router } = require("express");
-var app = express();
+const app = express();
 const morgan = require("morgan");
 const logger = morgan("combined");
 const mainRoute = require("./routes/main/main");
 const productsRoute = require("./routes/products/productsRoute");
-const productRoute = require("./routes/products/productRoute");
+const {
+  getProductById,
+  updateProduct
+} = require("./routes/products/productRoute");
+// console.log(productRoute);
+const usersRoute = require("./routes/users/usersRoute");
 
 const startServer = port => {
   app
     .use(bodyParser.urlencoded({ extended: false }))
     .use(bodyParser.json())
+
     .get("/", mainRoute)
     .get("/products", productsRoute)
-    .get("/products/:id", productRoute)
+    .get("/products/:id", getProductById)
+    .get("/users/:id", usersRoute)
 
     .post("/products", productsRoute)
+    .post("/users", usersRoute)
+
+    .put("/products/:id", updateProduct)
 
     // .use("/", router)
     .use(logger)

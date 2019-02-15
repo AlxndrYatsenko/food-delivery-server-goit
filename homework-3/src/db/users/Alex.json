@@ -1,1 +1,6 @@
-{"username":"Alex","telephone":"063 222 222 222","password":"12345","email":"alex@gmail.com"}
+{
+  "username": "Alex",
+  "telephone": "063 222 222 222",
+  "password": "12345",
+  "email": "alex@gmail.com"
+}
