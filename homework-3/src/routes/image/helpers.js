@@ -14,4 +14,4 @@ const copy = (oldPath, newPath, callback) => {
   readStream.pipe(writeStream);
 };
 
-module.exports = copy;
+module.exports = { copy };

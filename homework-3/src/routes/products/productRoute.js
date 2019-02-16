@@ -14,12 +14,13 @@ const getProductById = (req, res) => {
 
   const data = fs.readFileSync(filePath, "utf8");
   const parsedData = JSON.parse(data);
-  const updatedProduct = parsedData.find(p => p.id.toString() === id);
+  const response = parsedData.find(p => p.id.toString() === id);
 
-  updatedProduct
-    ? res.status(200).json({ status: "success", products: updatedProduct })
+  response
+    ? res.status(200).json({ status: "success", product: response })
     : res.status(404).json({ status: "not found" });
 };
+
 const updateProduct = (req, res) => {
   const id = req.params.id;
 

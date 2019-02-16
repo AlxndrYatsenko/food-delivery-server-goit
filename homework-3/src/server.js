@@ -4,7 +4,6 @@ const multer = require("multer");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const logger = morgan("combined");
-const upload = multer({ dest: "uploads/" });
 const mainRoute = require("./routes/main/main");
 const productsRoute = require("./routes/products/productsRoute");
 const imageRoute = require("./routes/image/imageRoute");
@@ -12,7 +11,13 @@ const {
   getProductById,
   updateProduct
 } = require("./routes/products/productRoute");
-// console.log(productRoute);
+
+const createCategory = require("./routes/categories/categoriesRouter");
+
+const {
+  getCategoryById,
+  updateCategory
+} = require("./routes/categories/categoryRouter");
 const { usersRoute, updateUser } = require("./routes/users/usersRoute");
 
 const startServer = port => {
@@ -24,15 +29,17 @@ const startServer = port => {
     .get("/products", productsRoute)
     .get("/products/:id", getProductById)
     .get("/users/:id", usersRoute)
+    .get("/categories/:id", getCategoryById)
 
     .post("/products", productsRoute)
     .post("/users", usersRoute)
     .post("/image", imageRoute())
+    .post("/categories", createCategory)
 
     .put("/products/:id", updateProduct)
     .put("/users/:id", updateUser)
+    .put("/categories/:id", updateCategory)
 
-    // .use("/", router)
     .use(logger)
     .listen(port, () => {
       console.log("Server is listening on port " + port);

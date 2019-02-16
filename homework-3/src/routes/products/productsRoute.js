@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const url = require("url");
-const { getProductsById, getProductsByCategory } = require("./helpers");
+const { getProductsByIds, getProductsByCategory } = require("./helpers");
 
 const { createProduct } = require("./helpers");
 
@@ -40,7 +40,7 @@ const productsRoute = (req, res) => {
 
           if (ids) {
             queryArr = ids.split(",").map(i => i.replace(/[^-0-9]/gim, "")); // get ids array from url
-            responseData = getProductsById(queryArr, parsedData);
+            responseData = getProductsByIds(queryArr, parsedData);
           }
 
           if (category) {

@@ -21,7 +21,7 @@ const getProductsByCategory = (queryArr, parsedData) => {
   return getValues(productsArr);
 };
 
-const getProductsById = (queryArr, parsedData) => {
+const getProductsByIds = (queryArr, parsedData) => {
   const productsArr = [];
   parsedData.map(p =>
     queryArr.forEach(id => p.id.toString() === id && productsArr.push(p))
@@ -66,4 +66,4 @@ const createProduct = body => {
   return newProduct;
 };
 
-module.exports = { getProductsByCategory, getProductsById, createProduct };
+module.exports = { getProductsByCategory, getProductsByIds, createProduct };
