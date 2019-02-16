@@ -1,10 +1,13 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
+const multer = require("multer");
+const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const logger = morgan("combined");
+const upload = multer({ dest: "uploads/" });
 const mainRoute = require("./routes/main/main");
 const productsRoute = require("./routes/products/productsRoute");
+const imageRoute = require("./routes/image/imageRoute");
 const {
   getProductById,
   updateProduct
@@ -24,6 +27,7 @@ const startServer = port => {
 
     .post("/products", productsRoute)
     .post("/users", usersRoute)
+    .post("/image", imageRoute())
 
     .put("/products/:id", updateProduct)
     .put("/users/:id", updateUser)
