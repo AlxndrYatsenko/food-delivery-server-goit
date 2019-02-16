@@ -11,14 +11,34 @@ const getDate = () => {
   return day + "-" + month + "-" + year;
 };
 
+const getParsedFile = filePath => {
+  const allCategory = fs.readFileSync(filePath, "utf8");
+  return JSON.parse(allCategory);
+};
+
 const getAllCategories = () => {
   const filePath = path.join(
     __dirname,
     "../db/categories",
     "all-categories.json"
   );
-  const allCategory = fs.readFileSync(filePath, "utf8");
-  return JSON.parse(allCategory);
+  return getParsedFile(filePath);
 };
 
-module.exports = { getDate, getAllCategories };
+const getAllProducts = () => {
+  const filePath = path.join(__dirname, "../db/products", "all-products.json");
+  return getParsedFile(filePath);
+};
+
+const getAllUsers = () => {
+  const filePath = path.join(__dirname, "../db/users", "all-users.json");
+  return getParsedFile(filePath);
+};
+
+module.exports = {
+  getDate,
+  getParsedFile,
+  getAllCategories,
+  getAllProducts,
+  getAllUsers
+};

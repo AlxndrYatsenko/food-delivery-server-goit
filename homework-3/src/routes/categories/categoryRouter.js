@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-// const getDate = require("../../servises/services");
+
+const { getAllCategories } = require("../../servises/services");
 
 const filePath = path.join(
   __dirname,
@@ -12,9 +13,8 @@ const filePath = path.join(
 const getCategoryById = (req, res) => {
   const id = req.params.id;
 
-  const data = fs.readFileSync(filePath, "utf8");
-  const parsedData = JSON.parse(data);
-  const response = parsedData.find(c => c.id.toString() === id);
+  const allCategories = getAllCategories();
+  const response = allCategories.find(c => c.id.toString() === id);
 
   response
     ? res.status(200).json({ status: "success", category: response })
@@ -24,25 +24,32 @@ const getCategoryById = (req, res) => {
 const updateCategory = (req, res) => {
   const id = req.params.id;
 
-  const data = fs.readFileSync(filePath, "utf8");
+  const allCategories = getAllCategories();
 
-  const parsedData = JSON.parse(data);
-  const oldCategory = parsedData.find(c => c.id.toString() === id);
+  const oldCategory = allCategories.find(c => c.id.toString() === id);
 
   if (!oldCategory) return res.status(404).json({ status: "not found" });
 
-  const parsedDataWithOutOld = parsedData.filter(c => c.id.toString() !== id);
+  const allCategoriesWithOutOld = allCategories.filter(
+    c => c.id.toString() !== id
+  );
 
   const newCategory = req.body;
 
   const updatedCategory = { ...oldCategory, ...newCategory };
 
-  const newData = parsedDataWithOutOld.concat(updatedCategory);
+  const newData = allCategoriesWithOutOld.concat(updatedCategory);
 
-  res.status(200).json({ status: "success", category: updatedCategory });
+  const sendUpdatedCategory = () =>
+    res.status(200).json({ status: "success", category: updatedCategory });
 
-  fs.writeFile(filePath, JSON.stringify(newData), function(error) {
-    if (error) res.send(error);
-  });
+  Promise.resolve(
+    fs.writeFile(filePath, JSON.stringify(newData), error => {
+      if (error) res.send(error);
+    })
+  )
+    .then(sendUpdatedCategory())
+    .catch(error => res.send(error));
 };
+
 module.exports = { getCategoryById, updateCategory };

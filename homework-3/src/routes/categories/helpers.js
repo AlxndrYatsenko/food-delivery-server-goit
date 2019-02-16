@@ -9,32 +9,25 @@ const createCategory = body => {
     "../../db/categories",
     "all-categories.json"
   );
-  const allCategory = getAllCategories();
 
-  // const requestData = ({ categories }) => {
-  //   const categoriesArr = categories
-  //     .split(",")
-  //     .map(c => c.replace(/[^-a-z]/gim, ""));
+  const allCategories = getAllCategories();
+  const requestCategory = body.categories;
+  const isCategoryExist = allCategories.some(
+    c => c.categories === requestCategory
+  );
+  const newCategory = { id: shortid.generate(), ...body };
 
-  //   const changedRequestData = {
-  //     ...body,
-  //     // ...{
-  //     //   created: getDate(),
-  //     //   categories: categoriesArr
-  //     // }
-  //   };
+  const writeCategory = () => {
+    const newData = allCategories.concat(newCategory);
 
-  //   return changedRequestData;
-  // };
+    fs.writeFile(filePath, JSON.stringify(newData), function(error) {
+      if (error) throw error;
+    });
+  };
 
-  const newProduct = [{ id: shortid.generate(), ...body }];
-
-  const newData = allCategory.concat(newProduct);
-
-  fs.writeFile(filePath, JSON.stringify(newData), function(error) {
-    if (error) throw error;
-  });
-  return newProduct;
+  return isCategoryExist
+    ? Promise.reject("This category already exists")
+    : Promise.resolve(writeCategory()).then(() => newCategory);
 };
 
 module.exports = { createCategory };
