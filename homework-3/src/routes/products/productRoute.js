@@ -31,15 +31,15 @@ const updateProduct = (req, res) => {
 
   if (!oldProduct) return res.status(404).json({ status: "not found" });
 
-  const parsedDataWithOutOld = parsedData.filter(p => p.id.toString() !== id);
-
   const newProduct = req.body;
 
-  const updatedData = { modified: getDate() };
+  const updatedField = { modified: getDate() };
 
-  const updatedProduct = { ...oldProduct, ...newProduct, ...updatedData };
+  const updatedProduct = { ...oldProduct, ...newProduct, ...updatedField };
 
-  const newData = parsedDataWithOutOld.concat(updatedProduct);
+  const newData = allCategories.map(p =>
+    p.id.toString() === id ? { ...updatedProduct } : p
+  );
 
   res.status(200).json({ status: "success", product: updatedProduct });
 

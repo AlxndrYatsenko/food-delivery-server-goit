@@ -1,69 +1,67 @@
 const fs = require("fs");
-const path = require("path");
+const { readFile, writeFile } = require("../../utils/fs");
+const { productsPath } = require("../../servises/path");
+const { getAllProducts } = require("../../servises/services");
+
 const shortid = require("shortid");
 
-const getDate = require("../../servises/services");
+const { getDate, getValues } = require("../../servises/services");
 
-const getValues = arr =>
-  arr.map(({ id, sku, name, description }) => {
-    return { id, sku, name, description };
-  });
+const queryArr = string => string.split(",");
 
-const getProductsByCategory = (queryArr, parsedData) => {
+const getProductsByCategory = (categories, parsedData) => {
+  const categoriesArr = queryArr(categories);
+
   const productsArr = [];
-  queryArr.map(category =>
-    parsedData.map(p =>
+
+  parsedData.map(p =>
+    categoriesArr.map(category =>
       p.categories.forEach(e => {
         if (e === category && !productsArr.includes(p)) productsArr.push(p);
       })
     )
   );
+  console.log(getValues(productsArr));
   return getValues(productsArr);
 };
 
-const getProductsByIds = (queryArr, parsedData) => {
+const getProductsByIds = (ids, parsedData) => {
+  const idsArr = queryArr(ids);
+
   const productsArr = [];
   parsedData.map(p =>
-    queryArr.forEach(id => p.id.toString() === id && productsArr.push(p))
+    idsArr.forEach(id => p.id.toString() === id && productsArr.push(p))
   );
   return getValues(productsArr);
 };
 
 const createProduct = body => {
-  const filePath = path.join(
-    __dirname,
-    "../../",
-    "db/products",
-    "/all-products.json"
-  );
+  const allProducts = getAllProducts();
 
-  const allProducts = fs.readFileSync(filePath, "utf8");
-  const parsedData = JSON.parse(allProducts);
+  function requestData(reqBody) {
+    const getCategoriesArr = () =>
+      reqBody.categories.split(",").map(c => c.replace(/[^-a-z]/gim, ""));
 
-  const requestData = ({ categories }) => {
-    const categoriesArr = categories
-      .split(",")
-      .map(c => c.replace(/[^-a-z]/gim, ""));
+    const categoriesField = reqBody.categories
+      ? { categories: getCategoriesArr() }
+      : null;
 
     const changedRequestData = {
-      ...body,
-      ...{
-        created: getDate(),
-        categories: categoriesArr
-      }
+      ...reqBody,
+      ...{ created: getDate() },
+      ...categoriesField
     };
 
     return changedRequestData;
-  };
+  }
 
-  const newProduct = [{ id: shortid.generate(), ...requestData(body) }];
+  const newProduct = { id: shortid.generate(), ...requestData(body) };
+  console.log(newProduct);
+  const newData = allProducts.concat(newProduct);
 
-  const newData = parsedData.concat(newProduct);
-
-  fs.writeFile(filePath, JSON.stringify(newData), function(error) {
-    if (error) throw error;
-  });
-  return newProduct;
+  return writeFile(productsPath, JSON.stringify(newData)).then(
+    () => newProduct
+  );
 };
 
 module.exports = { getProductsByCategory, getProductsByIds, createProduct };

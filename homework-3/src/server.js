@@ -1,3 +1,5 @@
+const https = require("https");
+const options = require("./ssl/options");
 const express = require("express");
 const app = express();
 const router = require("./routes/router");
@@ -11,24 +13,11 @@ const startServer = port => {
     .use(bodyParser.json())
     .use("/", router)
     .use(logger)
+
+    // https.createServer(options, app)
     .listen(port, () => {
       console.log("Server is listening on port " + port);
     });
 };
-
-// const https = require("https");
-// const url = require("url");
-
-// const options = require("./ssl/options");
-
-// const startServer = port => {
-//   const server = https.createServer(options, (req, res) => {
-//     const parsedUrl = url.parse(req.url);
-//     const pathName = "/" + parsedUrl.pathname.split("/")[1] || "/";
-//     const func = router[pathName] || router.default;
-//     logger(req, res, () => func(req, res));
-//   });
-//   server.listen(port);
-// };
 
 module.exports = startServer;

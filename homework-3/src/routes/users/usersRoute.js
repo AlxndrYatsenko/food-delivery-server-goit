@@ -32,13 +32,13 @@ const updateUser = (req, res) => {
 
   const allUsers = getAllUsers();
 
-  const allUsersWithOutUpdatable = allUsers.filter(p => p.id.toString() !== id);
-
   const updatableUser = req.body;
 
   const updatedUser = { ...prevUser, ...updatableUser };
 
-  const newData = allUsersWithOutUpdatable.concat(updatedUser);
+  const newData = allUsers.map(user =>
+    user.id.toString() === id ? { ...updatedUser } : user
+  );
 
   res.status(200).json({ status: "success", user: updatedUser });
 
