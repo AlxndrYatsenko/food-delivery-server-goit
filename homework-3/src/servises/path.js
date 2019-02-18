@@ -7,9 +7,10 @@ const categoriesPath = path.join(
 
 const productsPath = path.join(
   __dirname,
-  "../",
-  "db/products",
-  "/all-products.json"
+  "../db/products",
+  "all-products.json"
 );
 
-module.exports = { categoriesPath, productsPath };
+const usersPath = path.join(__dirname, "../db/user", "all-products.json");
+
+module.exports = { categoriesPath, productsPath, usersPath };

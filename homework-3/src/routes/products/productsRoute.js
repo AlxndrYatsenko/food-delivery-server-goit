@@ -1,5 +1,6 @@
 const fs = require("fs");
 const url = require("url");
+const { writeFile } = require("../../utils/fs");
 const { getAllProducts } = require("../../servises/services");
 const { productsPath } = require("../../servises/path");
 const {
@@ -22,18 +23,14 @@ const productsRoute = (req, res) => {
     getAllProducts()
       .then(allProducts => {
         if (category) {
-          console.log("from", category);
-          console.log(getProductsByCategory(category, allProducts));
           return getProductsByCategory(category, allProducts);
         }
 
         if (ids) {
-          console.log(ids);
           return getProductsByIds(ids, allProducts);
         }
       })
       .then(responseData => {
-        console.log(responseData);
         return sendSuccess(res, responseData, "products");
       })
       .catch(error => sendError(res, error));

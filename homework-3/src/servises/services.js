@@ -19,21 +19,15 @@ const getDate = () => {
 };
 
 const getParsedFile = filePath => {
-  return readFile(filePath, "utf8").then(data => JSON.parse(data));
-  // return JSON.parse(allCategory);
+  const allCategory = fs.readFileSync(filePath, "utf8");
+  return JSON.parse(allCategory);
 };
 
 const getAllCategories = () => {
-  // const filePath = path.join(
-  //   __dirname,
-  //   "../db/categories",
-  //   "all-categories.json"
-  // );
   return getParsedFile(categoriesPath);
 };
 
 const getAllProducts = () => {
-  // const filePath = path.join(__dirname, "../db/products", "all-products.json");
   return getParsedFile(productsPath);
 };
 

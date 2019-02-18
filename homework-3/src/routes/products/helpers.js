@@ -1,5 +1,4 @@
-const fs = require("fs");
-const { readFile, writeFile } = require("../../utils/fs");
+const { writeFile } = require("../../utils/fs");
 const { productsPath } = require("../../servises/path");
 const { getAllProducts } = require("../../servises/services");
 
@@ -9,29 +8,20 @@ const { getDate, getValues } = require("../../servises/services");
 
 const queryArr = string => string.split(",");
 
-const getProductsByCategory = (categories, parsedData) => {
-  const categoriesArr = queryArr(categories);
-
-  const productsArr = [];
-
-  parsedData.map(p =>
-    categoriesArr.map(category =>
-      p.categories.forEach(e => {
-        if (e === category && !productsArr.includes(p)) productsArr.push(p);
-      })
-    )
+const getProductsByCategory = (categories, allProducts) => {
+  const productsArr = allProducts.filter(p =>
+    p.categories.find(c => categories.includes(c))
   );
-  console.log(getValues(productsArr));
   return getValues(productsArr);
 };
 
-const getProductsByIds = (ids, parsedData) => {
+const getProductsByIds = (ids, allProducts) => {
   const idsArr = queryArr(ids);
 
-  const productsArr = [];
-  parsedData.map(p =>
-    idsArr.forEach(id => p.id.toString() === id && productsArr.push(p))
+  const productsArr = allProducts.filter(p =>
+    idsArr.find(id => p.id.toString() === id)
   );
+
   return getValues(productsArr);
 };
 

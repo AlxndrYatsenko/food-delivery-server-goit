@@ -1,35 +1,33 @@
 const fs = require("fs");
-const path = require("path");
-const getDate = require("../../servises/services");
+const { productsPath } = require("../../servises/path");
+const { writeFile } = require("../../utils/fs");
+const { getAllProducts, getDate } = require("../../servises/services");
+const {
+  sendNotFound,
+  sendSuccess,
 
-const filePath = path.join(
-  __dirname,
-  "../../",
-  "db/products/",
-  "all-products.json"
-);
+  sendError
+} = require("../../servises/send");
 
 const getProductById = (req, res) => {
   const id = req.params.id;
-
-  const data = fs.readFileSync(filePath, "utf8");
-  const parsedData = JSON.parse(data);
-  const response = parsedData.find(p => p.id.toString() === id);
-
-  response
-    ? res.status(200).json({ status: "success", product: response })
-    : res.status(404).json({ status: "not found" });
+  getAllProducts()
+    .then(allProducts => allProducts.find(p => p.id.toString() === id))
+    .then(product =>
+      product ? sendSuccess(res, product, "product") : sendNotFound(res)
+    )
+    .catch(error => sendError(res, error));
 };
 
 const updateProduct = (req, res) => {
   const id = req.params.id;
 
-  const data = fs.readFileSync(filePath, "utf8");
+  const allProducts = getAllProducts();
+  console.log(allProducts);
 
-  const parsedData = JSON.parse(data);
-  const oldProduct = parsedData.find(p => p.id.toString() === id);
+  const oldProduct = allProducts.find(c => c.id.toString() === id);
 
-  if (!oldProduct) return res.status(404).json({ status: "not found" });
+  if (!oldProduct) return sendNotFound(res);
 
   const newProduct = req.body;
 
@@ -37,14 +35,12 @@ const updateProduct = (req, res) => {
 
   const updatedProduct = { ...oldProduct, ...newProduct, ...updatedField };
 
-  const newData = allCategories.map(p =>
-    p.id.toString() === id ? { ...updatedProduct } : p
+  const newData = allProducts.map(c =>
+    c.id.toString() === id ? { ...updatedProduct } : c
   );
 
-  res.status(200).json({ status: "success", product: updatedProduct });
-
-  fs.writeFile(filePath, JSON.stringify(newData), function(error) {
-    if (error) res.send(error);
-  });
+  writeFile(productsPath, JSON.stringify(newData))
+    .then(sendSuccess(res, updatedProduct))
+    .catch(error => res.send(error));
 };
 module.exports = { getProductById, updateProduct };
