@@ -1,11 +1,14 @@
-const path = require("path");
-const fs = require("fs");
-const { categoriesPath, productsPath } = require("../servises/path");
+const shortid = require("shortid");
+
+const { readFile } = require("../utils/fs");
+const { categoriesPath, productsPath, usersPath } = require("../servises/path");
 
 const getValues = arr =>
   arr.map(({ id, sku, name, description }) => {
     return { id, sku, name, description };
   });
+
+const getNewId = () => shortid.generate();
 
 const getDate = () => {
   const date = new Date();
@@ -14,12 +17,17 @@ const getDate = () => {
   const month = checkNumber(date.getMonth() + 1);
   const year = date.getFullYear();
 
-  return day + "-" + month + "-" + year;
+  return `${day}-${month}-${year}`;
 };
 
 const getParsedFile = filePath => {
-  const allCategory = fs.readFileSync(filePath, "utf8");
-  return JSON.parse(allCategory);
+  return readFile(filePath, "utf8").then(allCategory =>
+    JSON.parse(allCategory)
+  );
+};
+
+const getItemById = (arr, id) => {
+  return arr.find(u => u.id.toString() === id);
 };
 
 const getAllCategories = () => {
@@ -31,12 +39,13 @@ const getAllProducts = () => {
 };
 
 const getAllUsers = () => {
-  const filePath = path.join(__dirname, "../db/users", "all-users.json");
-  return getParsedFile(filePath);
+  return getParsedFile(usersPath);
 };
 
 module.exports = {
   getValues,
+  getItemById,
+  getNewId,
   getDate,
   getParsedFile,
   getAllCategories,

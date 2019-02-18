@@ -1,16 +1,17 @@
 const router = require("express").Router();
 const mainRoute = require("./main/main");
-const ordersRouter = require("./orders/ordersRouter");
+const createOrder = require("./orders");
 const productsRoute = require("./products/productsRoute");
 const imageRoute = require("./image/imageRoute");
 const { getProductById, updateProduct } = require("./products/productRoute");
 const createCategory = require("./categories/categoriesRouter");
-const { usersRoute, updateUser } = require("./users/usersRoute");
 const signUpRoute = require("./signup/sign-up-route");
 const {
   getCategoryById,
   updateCategory
 } = require("./categories/categoryRouter");
+
+const { getUserById, createUser, updateUser } = require("./users");
 
 router
   .get("/", mainRoute)
@@ -20,13 +21,13 @@ router
   .put("/products/:id", updateProduct)
   .post("/products", productsRoute)
 
-  .get("/users/:id", usersRoute)
-  .post("/users", usersRoute)
+  .get("/users/:id", getUserById)
+  .post("/users", createUser)
   .put("/users/:id", updateUser)
 
   .post("/signup", signUpRoute)
 
-  .post("/orders", ordersRouter)
+  .post("/orders", createOrder)
 
   .post("/image", imageRoute())
 
