@@ -1,10 +1,10 @@
-const { writeFile } = require("../../utils/fs");
-const { productsPath } = require("../../servises/path");
-const { getAllProducts } = require("../../servises/services");
+const { writeFile } = require("../../../utils/fs");
+const { productsPath } = require("../../../servises/path");
+const { getAllProducts } = require("../../../servises/services");
 
 const shortid = require("shortid");
 
-const { getDate, getValues } = require("../../servises/services");
+const { getDate, getValues } = require("../../../servises/services");
 
 const queryArr = string => string.split(",");
 
@@ -25,9 +25,19 @@ const getProductsByIds = (ids, allProducts) => {
   return getValues(productsArr);
 };
 
-const createProduct = body => {
-  const allProducts = getAllProducts();
+const createNewUser = body => {
+  const newUser = { id: getNewId(), ...body };
 
+  return getAllUsers()
+    .then(allUsers => allUsers.concat(newUser))
+    .then(newData => {
+      writeFile(usersPath, JSON.stringify(newData));
+      return newUser;
+    })
+    .catch(error => console.log(error));
+};
+
+const makeProduct = body => {
   function requestData(reqBody) {
     const getCategoriesArr = () =>
       reqBody.categories.split(",").map(c => c.replace(/[^-a-z]/gim, ""));
@@ -46,12 +56,10 @@ const createProduct = body => {
   }
 
   const newProduct = { id: shortid.generate(), ...requestData(body) };
-  console.log(newProduct);
-  const newData = allProducts.concat(newProduct);
 
-  return writeFile(productsPath, JSON.stringify(newData)).then(
-    () => newProduct
-  );
+  return getAllProducts(allProducts => allProducts.concat(newProduct))
+    .then(newData => writeFile(productsPath, JSON.stringify(newData)))
+    .then(() => newProduct);
 };
 
-module.exports = { getProductsByCategory, getProductsByIds, createProduct };
+module.exports = { getProductsByCategory, getProductsByIds, makeProduct };
