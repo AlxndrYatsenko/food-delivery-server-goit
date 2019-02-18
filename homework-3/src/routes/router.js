@@ -1,9 +1,14 @@
 const router = require("express").Router();
 const mainRoute = require("./main/main");
 const createOrder = require("./orders");
-const productsRoute = require("./products/productsRoute");
+
+const {
+  productsRoute,
+  getProductById,
+  updateProduct,
+  createProduct
+} = require("./products");
 const imageRoute = require("./image/imageRoute");
-const { getProductById, updateProduct } = require("./products/productRoute");
 const createCategory = require("./categories/categoriesRouter");
 const signUpRoute = require("./signup/sign-up-route");
 const {
@@ -19,7 +24,7 @@ router
   .get("/products", productsRoute)
   .get("/products/:id", getProductById)
   .put("/products/:id", updateProduct)
-  .post("/products", productsRoute)
+  .post("/products", createProduct)
 
   .get("/users/:id", getUserById)
   .post("/users", createUser)

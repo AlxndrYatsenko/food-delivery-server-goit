@@ -14,13 +14,13 @@ POST:
 #products:
 GET:
 
-- localhost:4000/products/gUvhOj8sv
-- localhost:4000/products/?category=soup,main
-- localhost:4000/products/?ids=19112831,19112832,19112835
+- https://localhost:4000/products/gUvhOj8sv
+- https://localhost:4000/products/?category=soup,main
+- https://localhost:4000/products/?ids=19112831,19112832,19112835
 
 POST:
 
-- localhost:4000/products raw:
+- https://localhost:4000/products raw:
   {
   "sku": 1120004,
   "name": "Полента",
@@ -35,16 +35,16 @@ POST:
 
 PUT:
 
-- localhost:4000/products/19112831 raw: {"price": "200"}
+- https://localhost:4000/products/19112831 raw: {"price": "200"}
 
 #users:
 GET:
 
-- localhost:4000/users/0kQbKfylc
+- https://localhost:4000/users/0kQbKfylc
 
 POST:
 
-- localhost:4000/users raw:
+- https://localhost:4000/users raw:
   {
   "username": "someName",
   "phone": "063 222 222 222",
@@ -55,7 +55,7 @@ POST:
 #orders:
 POST:
 
-- localhost:4000/orders raw:
+- https://localhost:4000/orders raw:
   {
   "user": "0kQbKfylc",
   "products": ["19112831", "19112835", "19112834"],
@@ -66,7 +66,7 @@ POST:
 #images:
 POST:
 
-- localhost:4000/image form-data:
+- https://localhost:4000/image form-data:
   {
   file: <choseFile>
   userId: 0kQbKfylc

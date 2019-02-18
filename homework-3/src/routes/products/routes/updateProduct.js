@@ -1,23 +1,7 @@
-const fs = require("fs");
-const { productsPath } = require("../../servises/path");
-const { writeFile } = require("../../utils/fs");
-const { getAllProducts, getDate } = require("../../servises/services");
-const {
-  sendNotFound,
-  sendSuccess,
-
-  sendError
-} = require("../../servises/send");
-
-const getProductById = (req, res) => {
-  const id = req.params.id;
-  getAllProducts()
-    .then(allProducts => allProducts.find(p => p.id.toString() === id))
-    .then(product =>
-      product ? sendSuccess(res, product, "product") : sendNotFound(res)
-    )
-    .catch(error => sendError(res, error));
-};
+const { productsPath } = require("../../../servises/path");
+const { writeFile } = require("../../../utils/fs");
+const { getAllProducts, getDate } = require("../../../servises/services");
+const { sendNotFound, sendSuccess } = require("../../../servises/send");
 
 const updateProduct = (req, res) => {
   const id = req.params.id;
@@ -43,4 +27,4 @@ const updateProduct = (req, res) => {
     .then(sendSuccess(res, updatedProduct))
     .catch(error => res.send(error));
 };
-module.exports = { getProductById, updateProduct };
+module.exports = updateProduct;
