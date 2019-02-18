@@ -1,7 +1,6 @@
 const path = require("path");
 const fs = require("fs");
 const { categoriesPath, productsPath } = require("../servises/path");
-const { readFile } = require("../utils/fs");
 
 const getValues = arr =>
   arr.map(({ id, sku, name, description }) => {

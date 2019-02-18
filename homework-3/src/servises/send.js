@@ -1,8 +1,9 @@
-const sendCreateSuccess = (res, data) =>
-  res.status(201).json({
-    status: "success",
-    category: data
-  });
+const sendCreateSuccess = (res, data, field) => {
+  const obj = { status: "success" };
+  const key = field;
+  obj[key] = data;
+  return res.status(201).json(obj);
+};
 
 const sendSuccess = (res, data, field) => {
   const obj = { status: "success" };

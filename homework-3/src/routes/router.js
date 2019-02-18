@@ -5,7 +5,7 @@ const imageRoute = require("./image/imageRoute");
 const { getProductById, updateProduct } = require("./products/productRoute");
 const createCategory = require("./categories/categoriesRouter");
 const { usersRoute, updateUser } = require("./users/usersRoute");
-const signUpRoute = require("./signup/sign-up-route");
+// const signUpRoute = require("./signup/sign-up-route");
 const {
   getCategoryById,
   updateCategory
@@ -18,7 +18,7 @@ router
   .get("/users/:id", usersRoute)
   .get("/categories/:id", getCategoryById)
 
-  .post("/signup", signUpRoute)
+  // .post("/signup", signUpRoute)
   .post("/products", productsRoute)
   .post("/users", usersRoute)
   .post("/image", imageRoute())

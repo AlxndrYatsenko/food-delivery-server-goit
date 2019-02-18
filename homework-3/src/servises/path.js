@@ -11,6 +11,6 @@ const productsPath = path.join(
   "all-products.json"
 );
 
-const usersPath = path.join(__dirname, "../db/user", "all-products.json");
+const usersPath = path.join(__dirname, "../db/users", "all-users.json");
 
 module.exports = { categoriesPath, productsPath, usersPath };

@@ -1,5 +1,11 @@
-const fs = require("fs");
+const { writeFile } = require("../../utils/fs");
 const { getUser, getAllUsers, createUser, filePath } = require("./helpers");
+const {
+  sendCreateSuccess,
+  sendSuccess,
+  sendNotFound,
+  sendError
+} = require("../../servises/send");
 
 const usersRoute = (req, res) => {
   if (req.method === "GET") {
@@ -7,19 +13,14 @@ const usersRoute = (req, res) => {
 
     const responseData = getUser(id);
 
-    responseData
-      ? res.status(200).json({ status: "success", products: responseData })
-      : res.status(404).json({ status: "not found" });
+    responseData ? sendSuccess(res, responseData, "user") : sendNotFound(res);
   }
 
   if (req.method === "POST") {
     const body = req.body;
-    const newProduct = createUser(body);
-
-    res.status(201).json({
-      status: "success",
-      product: newProduct
-    });
+    createUser(body)
+      .then(newUser => sendCreateSuccess(res, newUser, "user"))
+      .catch(error => sendError(res, error));
   }
 };
 
@@ -28,23 +29,21 @@ const updateUser = (req, res) => {
 
   const prevUser = getUser(id);
 
-  if (!prevUser) return res.status(404).json({ status: "not found" });
+  if (!prevUser) return sendNotFound(res);
 
   const allUsers = getAllUsers();
 
-  const updatableUser = req.body;
+  const newUser = req.body;
 
-  const updatedUser = { ...prevUser, ...updatableUser };
+  const updatedUser = { ...prevUser, ...newUser };
 
   const newData = allUsers.map(user =>
     user.id.toString() === id ? { ...updatedUser } : user
   );
 
-  res.status(200).json({ status: "success", user: updatedUser });
-
-  fs.writeFile(filePath, JSON.stringify(newData), function(error) {
-    if (error) res.send(error);
-  });
+  writeFile(filePath, JSON.stringify(newData))
+    .then(sendSuccess(res, updatedUser, "user"))
+    .catch(error => sendError(res, error));
 };
 
 module.exports = { usersRoute, updateUser };
