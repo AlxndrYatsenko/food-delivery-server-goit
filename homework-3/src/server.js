@@ -13,7 +13,6 @@ const startServer = port => {
     .use(bodyParser.json())
     .use("/", router)
     .use(logger);
-
   https.createServer(options, app).listen(port, () => {
     console.log("Server is listening on port " + port);
   });

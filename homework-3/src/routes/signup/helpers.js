@@ -11,7 +11,7 @@ const saveUser = user => {
     `${userName}-${shortid.generate()}.json`
   );
 
-  return writeFile(filePath, JSON.stringify(user));
+  return writeFile(filePath, JSON.stringify(user)).then(() => user);
 };
 
-module.exports = saveUser;
+module.exports = { saveUser };
