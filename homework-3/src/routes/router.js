@@ -14,20 +14,24 @@ const {
 
 router
   .get("/", mainRoute)
+
   .get("/products", productsRoute)
   .get("/products/:id", getProductById)
+  .put("/products/:id", updateProduct)
+  .post("/products", productsRoute)
+
   .get("/users/:id", usersRoute)
-  .get("/categories/:id", getCategoryById)
+  .post("/users", usersRoute)
+  .put("/users/:id", updateUser)
 
   .post("/signup", signUpRoute)
-  .post("/products", productsRoute)
-  .post("/users", usersRoute)
-  .post("/image", imageRoute())
-  .post("/categories", createCategory)
+
   .post("/orders", ordersRouter)
 
-  .put("/products/:id", updateProduct)
-  .put("/users/:id", updateUser)
+  .post("/image", imageRoute())
+
+  .get("/categories/:id", getCategoryById)
+  .post("/categories", createCategory)
   .put("/categories/:id", updateCategory);
 
 module.exports = router;
