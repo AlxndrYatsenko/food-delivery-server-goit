@@ -14,6 +14,9 @@ const sendSuccess = (res, data, field) => {
 
 const sendNotFound = res => res.status(404).json({ status: "Not Found" });
 
+const sendFaild = res =>
+  res.status(501).send({ status: "failed", order: null });
+
 const sendError = (res, error) =>
   res.status(409).json({
     status: error
@@ -23,5 +26,6 @@ module.exports = {
   sendCreateSuccess,
   sendSuccess,
   sendNotFound,
+  sendFaild,
   sendError
 };

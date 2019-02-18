@@ -12,12 +12,11 @@ const startServer = port => {
     .use(bodyParser.urlencoded({ extended: false }))
     .use(bodyParser.json())
     .use("/", router)
-    .use(logger)
+    .use(logger);
 
-    // https.createServer(options, app)
-    .listen(port, () => {
-      console.log("Server is listening on port " + port);
-    });
+  https.createServer(options, app).listen(port, () => {
+    console.log("Server is listening on port " + port);
+  });
 };
 
 module.exports = startServer;

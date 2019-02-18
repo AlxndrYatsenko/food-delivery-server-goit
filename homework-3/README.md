@@ -1,5 +1,16 @@
 # food-delivery-server-goit
 
+#signup:
+POST:
+
+- localhost:4000/signup raw:
+  {
+  "username": "Ivan",
+  "telephone": "063 777 77 77",
+  "password": "12345",
+  "email": "ivan@gmail.com"
+  }
+
 #products:
 GET:
 
@@ -10,7 +21,8 @@ GET:
 POST:
 
 - localhost:4000/products raw:
-  {"sku": 1120004,
+  {
+  "sku": 1120004,
   "name": "Полента",
   "description": "Полента (итал. polenta) — итальянское блюдо (каша) из кукурузной муки, аналог мамалыги.",
   "price": "95",
@@ -29,5 +41,33 @@ PUT:
 GET:
 
 - localhost:4000/users/0kQbKfylc
-  POST:
-- localhost:4000/users raw: {"username": "someName","phone": "063 222 222 222", "password": "12345", "email": "yor@gmail.com"}
+
+POST:
+
+- localhost:4000/users raw:
+  {
+  "username": "someName",
+  "phone": "063 222 222 222",
+  "password": "12345",
+  "email": "yor@gmail.com"
+  }
+
+#orders:
+POST:
+
+- localhost:4000/orders raw:
+  {
+  "user": "0kQbKfylc",
+  "products": ["19112831", "19112835", "19112834"],
+  "deliveryType": "delivery",
+  "deliveryAdress": "avenue"
+  }
+
+#images:
+POST:
+
+- localhost:4000/image form-data:
+  {
+  file: <choseFile>
+  userId: 0kQbKfylc
+  }

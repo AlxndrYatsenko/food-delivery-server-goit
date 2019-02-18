@@ -4,7 +4,7 @@ const path = require("path");
 const { copy } = require("./helpers");
 
 const TEMP_IMAGE_FOLDER = path.join(__dirname, "../../", "assets");
-const USER_IMAGE_FOLDER = path.join(__dirname, "../../", "data", "user-images");
+const USER_IMAGE_FOLDER = path.join(__dirname, "../..", "db", "users");
 
 const storage = multer.diskStorage({
   destination: (req, file, next) => {
