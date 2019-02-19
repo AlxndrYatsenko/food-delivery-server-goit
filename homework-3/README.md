@@ -16,7 +16,7 @@ GET:
 
 - https://localhost:4000/products/gUvhOj8sv
 - https://localhost:4000/products/?category=soup,main
-- https://localhost:4000/products/?ids=19112831,19112832,19112835
+- https://localhost:4000/products/?ids="19112831,19112832,19112835"
 
 POST:
 
