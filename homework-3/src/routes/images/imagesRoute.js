@@ -38,6 +38,7 @@ const moveImage = (fileObject, userId) => {
 
 const imageRoute = (req, res) => {
   const fileObject = req.file;
+  if (!fileObject) return res.status(404).send({ status: "Don't get file" });
   const userId = req.body.userId;
 
   moveImage(fileObject, userId).then(userImageFolderName => {

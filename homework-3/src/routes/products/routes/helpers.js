@@ -16,12 +16,7 @@ const getProductsByCategory = (categories, allProducts) => {
 };
 
 const getProductsByIds = (ids, allProducts) => {
-  const idsArr = queryArr(ids);
-
-  const productsArr = allProducts.filter(p =>
-    idsArr.find(id => p.id.toString() === id)
-  );
-
+  const productsArr = allProducts.filter(p => ids.includes(p.id.toString()));
   return getValues(productsArr);
 };
 
