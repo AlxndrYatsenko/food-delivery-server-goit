@@ -9,7 +9,10 @@ const userSchema = new Schema({
   nickName: String,
   location: String,
   password: String,
-  email: String
+  email: String,
+  favoriteProducts: Array,
+  viewedProducts: Array,
+  orders: Array
 });
 
 userSchema.plugin(timestamp);

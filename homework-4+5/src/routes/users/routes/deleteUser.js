@@ -5,13 +5,12 @@ const {
   sendError
 } = require("../../../servises/send");
 
-const updateUser = async (req, res) => {
-  const newUser = req.body;
+const getUser = (req, res) => {
   const id = req.params.id;
 
-  User.findOneAndUpdate({ _id: id }, newUser, { new: true })
+  User.deleteOne({ _id: id })
     .then(user => (user ? sendSuccess(res, user, "user") : sendNotFound(res)))
     .catch(error => sendError(res, error));
 };
 
-module.exports = updateUser;
+module.exports = getUser;
