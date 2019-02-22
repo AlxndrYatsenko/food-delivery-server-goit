@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const mainRoute = require("./main/main");
-const createOrder = require("./orders");
+const { createOrder, getOrderById } = require("./orders");
 const { getUserById, createUser, updateUser, deleteUser } = require("./users");
 const { imagesRoute } = require("./images");
 const { signUpRoute } = require("./signup");
@@ -26,6 +26,7 @@ router
 
   .post("/signup", signUpRoute)
 
+  .get("/orders/:id", getOrderById)
   .post("/orders", createOrder)
 
   .post("/images", imagesRoute());
