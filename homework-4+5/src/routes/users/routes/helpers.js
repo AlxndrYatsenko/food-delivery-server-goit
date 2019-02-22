@@ -1,20 +1,18 @@
-const { writeFile } = require("../../../utils/fs");
-const {
-  getAllUsers,
-  getItemById,
-  getNewId
-} = require("../../../servises/services");
-const { usersPath } = require("../../../servises/path");
+const bcrypt = require("bcrypt");
+const User = require("../../../models/modules/db/schemas/user");
 
-const createNewUser = body => {
-  const newUser = { id: getNewId(), ...body };
+const createNewUser = user => {
+  const hashedPassword = bcrypt.hashSync(user.password, 10);
 
-  return getAllUsers()
-    .then(allUsers => allUsers.concat(newUser))
-    .then(newData => {
-      writeFile(usersPath, JSON.stringify(newData));
-      return newUser;
-    })
-    .catch(error => console.log(error));
+  const userData = {
+    ...user,
+    ...{
+      password: hashedPassword
+    }
+  };
+
+  const newUser = new User(userData);
+
+  return newUser.save();
 };
-module.exports = { getItemById, createNewUser };
+module.exports = createNewUser;

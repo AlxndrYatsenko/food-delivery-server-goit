@@ -1,4 +1,4 @@
-const { createNewUser } = require("./helpers");
+const createNewUser = require("./helpers");
 const { sendCreateSuccess, sendError } = require("../../../servises/send");
 
 const createUser = (req, res) => {
