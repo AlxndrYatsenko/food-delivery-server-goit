@@ -55,9 +55,14 @@ POST:
   "creator": "5c70355143d2602aa0c29e54",
   "productsList": [
   {
-  "product": "1234567",
+  "product": "5c70da4df6020c1b84859707",
   "type": "XL",
   "itemsCount": 2
+  },
+  {
+  "product": "5c70da16f6020c1b84859706",
+  "type": "M",
+  "itemsCount": 1
   }
   ],
   "deliveryType": "delivery",
