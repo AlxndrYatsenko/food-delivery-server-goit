@@ -9,8 +9,8 @@ const productSchema = new Schema({
   price: Number,
   currency: String,
   creatorId: String,
-	categories: String,
-	likes: Number
+  categories: Array,
+  likes: Number
 });
 
 productSchema.plugin(timestamp);

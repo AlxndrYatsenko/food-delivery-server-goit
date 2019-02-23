@@ -22,6 +22,7 @@ router
   .put("/products/:id", updateProduct)
   .post("/products", createProduct)
 
+  .get("/users", getUserById)
   .get("/users/:id", getUserById)
   .post("/users", createUser)
   .put("/users/:id", updateUser)
