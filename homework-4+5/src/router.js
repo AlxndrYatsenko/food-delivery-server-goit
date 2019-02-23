@@ -1,15 +1,18 @@
 const router = require("express").Router();
-const mainRoute = require("./main/main");
-const { createOrder, getOrderById } = require("./orders");
-const { getUserById, createUser, updateUser, deleteUser } = require("./users");
-const { imagesRoute } = require("./images");
-const { signUpRoute } = require("./signup");
+const mainRoute = require("./controllers/main/main");
+const { createOrder, getOrderById } = require("./controllers/orders");
+const {
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser
+} = require("./controllers/users");
 const {
   productsRoute,
   getProductById,
   updateProduct,
   createProduct
-} = require("./products");
+} = require("./controllers/products");
 
 router
   .get("/", mainRoute)
@@ -24,11 +27,9 @@ router
   .put("/users/:id", updateUser)
   .delete("/users/:id", deleteUser)
 
-  .post("/signup", signUpRoute)
 
   .get("/orders/:id", getOrderById)
   .post("/orders", createOrder)
 
-  .post("/images", imagesRoute());
 
 module.exports = router;

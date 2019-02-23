@@ -1,4 +1,4 @@
-const Product = require("../../../models/modules/db/schemas/product");
+const Product = require("../../../models/schemas/product");
 const { sendNotFound, sendSuccess } = require("../../../servises/send");
 
 const updateProduct = (req, res) => {

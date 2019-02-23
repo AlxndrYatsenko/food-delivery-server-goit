@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const User = require("../../../models/modules/db/schemas/user");
+const User = require("../../../models/schemas/user");
 const { sendCreateSuccess, sendError } = require("../../../servises/send");
 
 const createUser = (req, res) => {
