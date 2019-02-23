@@ -1,4 +1,4 @@
-const { getAllProducts } = require("../../../servises/services");
+const Product = require("../../../models/modules/db/schemas/product");
 const {
   sendNotFound,
   sendSuccess,
@@ -7,11 +7,9 @@ const {
 
 const getProductById = (req, res) => {
   const id = req.params.id;
-  getAllProducts()
-    .then(allProducts => allProducts.find(p => p.id.toString() === id))
-    .then(product =>
-      product ? sendSuccess(res, product, "product") : sendNotFound(res)
-    )
+
+  Product.findById(id)
+    .then(user => (user ? sendSuccess(res, user, "user") : sendNotFound(res)))
     .catch(error => sendError(res, error));
 };
 

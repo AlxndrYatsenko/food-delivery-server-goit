@@ -1,37 +1,33 @@
-const fs = require("fs");
+const Product = require("../../../models/modules/db/schemas/product");
 const url = require("url");
-const { getAllProducts } = require("../../../servises/services");
-const { productsPath } = require("../../../servises/path");
 const { sendSuccess, sendError } = require("../../../servises/send");
-const { getProductsByIds, getProductsByCategory } = require("./helpers");
+
+const getArrFromQuery = str => str.replace(/\'|"|\s/g, "").split(",");
 
 const productsRoute = (req, res) => {
   const {
     query: { category, ids }
   } = url.parse(req.url, true);
 
-  getAllProducts()
-    .then(allProducts => {
-      if (category) {
-        return getProductsByCategory(category, allProducts);
-      }
+  const getProducts = () => {
+    if (category) {
+      const categoriesArr = getArrFromQuery(category);
+      return Product.find({ categories: categoriesArr });
+    }
 
-      if (ids) {
-        return getProductsByIds(ids, allProducts);
-      }
-    })
-    .then(responseData => {
-      return sendSuccess(res, responseData, "products");
-    })
+    if (ids) {
+      const idsArr = getArrFromQuery(ids);
+      return Product.find({ _id: idsArr });
+    }
+
+    if (!category && !ids) {
+      return Product.find();
+    }
+  };
+
+  return Promise.resolve(getProducts())
+    .then(allProducts => sendSuccess(res, allProducts, "products"))
     .catch(error => sendError(res, error));
-
-  if (!category && !ids) {
-    res.writeHead(200, {
-      "Content-Type": "application/json"
-    });
-    const readStream = fs.createReadStream(productsPath);
-    readStream.pipe(res);
-  }
 };
 
 module.exports = productsRoute;

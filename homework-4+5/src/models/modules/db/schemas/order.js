@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const timestamp = require("../middleware/timestamp");
 
-const userSchema = new Schema({
+const orderSchema = new Schema({
   productsList: Array,
   deliveryType: String,
   deliveryAdress: String,
@@ -10,8 +10,8 @@ const userSchema = new Schema({
   status: String
 });
 
-userSchema.plugin(timestamp);
+orderSchema.plugin(timestamp);
 
-const Order = mongoose.model("Order", userSchema);
+const Order = mongoose.model("Order", orderSchema);
 
 module.exports = Order;
