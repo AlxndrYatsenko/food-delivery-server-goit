@@ -1,48 +1,67 @@
-food-delivery-server-goit
+# food-delivery-server-goit
 
-#signup:
-
-POST:
-
-localhost:4000/signup raw: { "username": "Ivan", "telephone": "063 777 77 77", "password": "12345", "email": "ivan@gmail.com" }
-
-#products: 
-
+#products:
 GET:
 
-https://localhost:4000/products/gUvhOj8sv
-https://localhost:4000/products/?category=soup,main
-https://localhost:4000/products/?ids="19112831,19112832,19112835"
+- https://localhost:8080/products/5c705139a107d12848ee4037
+- https://localhost:8080/products/?category="soup,main"
+- https://localhost:8080/products/?ids="5c70da16f6020c1b84859706,5c70da4df6020c1b84859707,5c705139a107d12848ee4037"
 
 POST:
 
-https://localhost:4000/products raw: { "sku": 1120004, "name": "Полента", "description": "Полента (итал. polenta) — итальянское блюдо (каша) из кукурузной муки, аналог мамалыги.", "price": "95", "currency": "UAN", "creatorId": 1, "created": "07-02-19", "modified": "07-02-19", "categories": "main" }
+- https://localhost:8080/products raw:
+  {
+  "sku": 1120002,
+  "name": "Пицца Маргарита",
+  "description": "Пожалуй, самая популярная в мире, даже меню любой пиццерии начинается, как правило, именно с неё. Состав этой пиццы необычайно прост, её основные ингредиенты: сыр моцарелла, спелые помидоры и листья свежего базилика, которые придают ей неповторимый вкус и аромат.",
+  "price": "80",
+  "currency": "UAN",
+  "creatorId": "5c7049226c32f60844f274eb",
+  "categories": ["pizza"],
+  "likes": 12
+  }
 
 PUT:
 
-https://localhost:4000/products/19112831 raw: {"price": "200"}
-
+- https://localhost:8080/products/5c70da6df6020c1b84859708 raw: {"price": "200"}
 
 #users:
-
 GET:
 
-https://localhost:4000/users/0kQbKfylc
+- https://localhost:8080/users/5c6ffd096df7301f04f1e1de
 
 POST:
 
-https://localhost:4000/users raw: { "username": "someName", "phone": "063 222 222 222", "password": "12345", "email": "yor@gmail.com" }
-
+- https://localhost:8080/users raw:
+  {
+  "firstName": "Elon",
+  "lastName": "Musk",
+  "phone": "vcgdfcxxfzsd",
+  "nickName": "Tesla",
+  "location": "USA",
+  "password": "0987654321",
+  "email": "tesla@mail.com"
+  }
 
 #orders:
+GET:
+
+- https://localhost:8080/orders/5c7047dfd7f59e0eb0b42e7b
 
 POST:
 
-https://localhost:4000/orders raw: { "user": "0kQbKfylc", "products": ["19112831", "19112835", "19112834"], "deliveryType": "delivery", "deliveryAdress": "avenue" }
-
-
-#images: 
-
-POST:
-
-https://localhost:4000/images form-data: { file: userId: 0kQbKfylc }
+- https://localhost:8080/orders raw:
+  {
+  "creator": "5c70355143d2602aa0c29e54",
+  "productsList": [
+  {
+  "product": "1234567",
+  "type": "XL",
+  "itemsCount": 2
+  }
+  ],
+  "deliveryType": "delivery",
+  "deliveryAdress": "Kharkov",
+  "sumToPay": 500,
+  "status": "inProgress"
+  }
