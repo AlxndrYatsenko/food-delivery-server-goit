@@ -27,9 +27,7 @@ router
   .put("/users/:id", updateUser)
   .delete("/users/:id", deleteUser)
 
-
   .get("/orders/:id", getOrderById)
-  .post("/orders", createOrder)
-
+  .post("/orders", createOrder);
 
 module.exports = router;

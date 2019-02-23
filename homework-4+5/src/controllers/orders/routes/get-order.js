@@ -1,5 +1,9 @@
-const Order = require("../../models/schemas/order");
-const { sendSuccess, sendNotFound, sendError } = require("../../servises/send");
+const Order = require("../../../models/schemas/order");
+const {
+  sendSuccess,
+  sendNotFound,
+  sendError
+} = require("../../../servises/send");
 
 const getOrderById = (req, res) => {
   const id = req.params.id;

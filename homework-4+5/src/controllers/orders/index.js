@@ -1,4 +1,4 @@
-const createOrder = require("./createOrder");
-const getOrderById = require("./getOrderById");
+const createOrder = require("./routes/create-order");
+const getOrderById = require("./routes/get-order");
 
 module.exports = { createOrder, getOrderById };

@@ -1,6 +1,6 @@
-const getUserById = require("./routes/getUserById");
-const createUser = require("./routes/createUser");
-const updateUser = require("./routes/updateUser");
-const deleteUser = require("./routes/deleteUser");
+const getUserById = require("./routes/get-user");
+const createUser = require("./routes/create-user");
+const updateUser = require("./routes/update-user");
+const deleteUser = require("./routes/delete-user");
 
 module.exports = { getUserById, createUser, updateUser, deleteUser };

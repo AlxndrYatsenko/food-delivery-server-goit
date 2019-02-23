@@ -1,5 +1,5 @@
-const Order = require("../../models/schemas/order");
-const { sendError, sendCreateSuccess } = require("../../servises/send");
+const Order = require("../../../models/schemas/order");
+const { sendError, sendCreateSuccess } = require("../../../servises/send");
 
 const createOrder = (req, res) => {
   const body = req.body;
