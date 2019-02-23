@@ -1,15 +1,20 @@
 const router = require("express").Router();
-const mainRoute = require("./main/main");
-const { createOrder, getOrderById } = require("./orders");
-const { getUserById, createUser, updateUser, deleteUser } = require("./users");
-const { imagesRoute } = require("./images");
-const { signUpRoute } = require("./signup");
+const mainRoute = require("./controllers/main/main");
+const { createOrder, getOrderById } = require("./controllers/orders");
+const {
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser
+} = require("./controllers/users");
 const {
   productsRoute,
   getProductById,
   updateProduct,
   createProduct
-} = require("./products");
+} = require("./controllers/products");
+const { imagesRoute } = require("./routes/images");
+const { signUpRoute } = require("./routes/signup");
 
 router
   .get("/", mainRoute)

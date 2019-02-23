@@ -1,16 +1,16 @@
-const Product = require("../../../models/modules/db/schemas/product");
+const User = require("../../../models/schemas/user");
 const {
-  sendNotFound,
   sendSuccess,
+  sendNotFound,
   sendError
 } = require("../../../servises/send");
 
-const getProductById = (req, res) => {
+const getUserById = (req, res) => {
   const id = req.params.id;
 
-  Product.findById(id)
+  User.findById(id)
     .then(user => (user ? sendSuccess(res, user, "user") : sendNotFound(res)))
     .catch(error => sendError(res, error));
 };
 
-module.exports = getProductById;
+module.exports = getUserById;

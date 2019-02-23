@@ -1,4 +1,4 @@
-const Product = require("../../../models/modules/db/schemas/product");
+const Product = require("../../../models/schemas/product");
 const url = require("url");
 const { sendSuccess, sendError } = require("../../../servises/send");
 
