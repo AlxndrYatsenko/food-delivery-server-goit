@@ -11,7 +11,8 @@ const productSchema = new Schema(
     currency: String,
     creatorId: String,
     categories: Array,
-    likes: Number
+    likes: Number,
+    ingredients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }]
   },
   {
     timestamps: true

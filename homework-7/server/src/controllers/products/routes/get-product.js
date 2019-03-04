@@ -9,7 +9,14 @@ const getProductById = (req, res) => {
   const id = req.params.id;
 
   Product.findById(id)
-    .then(user => (user ? sendSuccess(res, user, "user") : sendNotFound(res)))
+    // .then(res => {
+    //   console.log(res);
+    //   return () => res;
+    // })
+    .populate("ingredients", "name")
+    .then(product =>
+      product ? sendSuccess(res, product, "product") : sendNotFound(res)
+    )
     .catch(error => sendError(res, error));
 };
 

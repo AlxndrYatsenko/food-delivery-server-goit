@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { createIngredient } = require("./controllers/ingredients");
 const mainRoute = require("./controllers/main/main");
 const { createOrder, getOrderById } = require("./controllers/orders");
 const {
@@ -16,6 +17,8 @@ const {
 
 router
   .get("/", mainRoute)
+
+  .post("/ingredients", createIngredient)
 
   .get("/products", productsRoute)
   .get("/products/:id", getProductById)
