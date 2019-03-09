@@ -24,7 +24,8 @@
     - `GET https://localhost:8080/autn/current`
 
 
-    ``` {
+    ```
+      {
        "token": "token"
        }
        ```
