@@ -9,10 +9,6 @@ const getProductById = (req, res) => {
   const id = req.params.id;
 
   Product.findById(id)
-    // .then(res => {
-    //   console.log(res);
-    //   return () => res;
-    // })
     .populate("ingredients", "name")
     .then(product =>
       product ? sendSuccess(res, product, "product") : sendNotFound(res)
