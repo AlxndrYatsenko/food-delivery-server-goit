@@ -33,7 +33,8 @@
 
     - `POST https://localhost:8080/register`
     
-    ``` {
+    ``` 
+    {
     	"firstName": "Elon",
     	"lastName": "Musk",
     	"phone": "333333333333333",
@@ -43,8 +44,6 @@
     	"email":"tesla@mail.com"
      }
      
-    	 ```
-
 2.  Ingredients
 
     **Добавление ингридиента для товара**
