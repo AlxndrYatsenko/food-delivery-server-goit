@@ -1,72 +1,78 @@
-# food-delivery-server-goit
+## Домашнее задание
 
-#products:
-GET:
+1.  Auth
 
-- https://localhost:8080/products/5c705139a107d12848ee4037
-- https://localhost:8080/products/?category="soup,main"
-- https://localhost:8080/products/?ids="5c70da16f6020c1b84859706,5c70da4df6020c1b84859707,5c705139a107d12848ee4037"
+    **Логин**
 
-POST:
+    - `POST https://localhost:8080/auth/login`
 
-- https://localhost:8080/products raw:
-  {
-  "sku": 1120002,
-  "name": "Пицца Маргарита",
-  "description": "Пожалуй, самая популярная в мире, даже меню любой пиццерии начинается, как правило, именно с неё. Состав этой пиццы необычайно прост, её основные ингредиенты: сыр моцарелла, спелые помидоры и листья свежего базилика, которые придают ей неповторимый вкус и аромат.",
-  "price": "80",
-  "currency": "UAN",
-  "creatorId": "5c7049226c32f60844f274eb",
-  "categories": ["pizza"],
-  "likes": 12
-  }
+    ```
+    {
+    "password": "1234567890",
+    "email": "trump@mail.com"
+    }
+    ```
 
-PUT:
+    **Логаут**
 
-- https://localhost:8080/products/5c70da6df6020c1b84859708 raw: {"price": "200"}
+    - В контроллере пока что ничего делать не нужно
 
-#users:
-GET:
+    **Получение текущего пользователя**
 
-- https://localhost:8080/users/5c6ffd096df7301f04f1e1de
+    - `GET https://localhost:8080/autn/current`
 
-POST:
 
-- https://localhost:8080/users raw:
-  {
-  "firstName": "Elon",
-  "lastName": "Musk",
-  "phone": "vcgdfcxxfzsd",
-  "nickName": "Tesla",
-  "location": "USA",
-  "password": "0987654321",
-  "email": "tesla@mail.com"
-  }
+    ```
 
-#orders:
-GET:
+    	 {"token": "token"	}
 
-- https://localhost:8080/orders/5c7047dfd7f59e0eb0b42e7b
 
-POST:
+    	 ```
 
-- https://localhost:8080/orders raw:
-  {
-  "creator": "5c70355143d2602aa0c29e54",
-  "productsList": [
-  {
-  "product": "5c70da4df6020c1b84859707",
-  "type": "XL",
-  "itemsCount": 2
-  },
-  {
-  "product": "5c70da16f6020c1b84859706",
-  "type": "M",
-  "itemsCount": 1
-  }
-  ],
-  "deliveryType": "delivery",
-  "deliveryAdress": "Kharkov",
-  "sumToPay": 500,
-  "status": "inProgress"
-  }
+    **Регистрация текущего пользователя**
+
+    - `POST https://localhost:8080/register`
+
+    ```
+     {
+    	"firstName": "Elon",
+    	"lastName": "Musk",
+    	"phone": "333333333333333",
+    	"nickName": "Tesla",
+    	"location": "USA",
+    	"password": "password",
+    	"email":"tesla@mail.com"
+     }
+    	 ```
+
+2.  Ingredients
+
+    **Добавление ингридиента для товара**
+
+    - `POST https://localhost:8080/ingredients`
+
+    ```
+     {
+      "name": "tomato",
+      "description": "Some vegitable"
+     }
+    ```
+
+3.  Comments
+
+    **Создание коментария**
+
+    - `POST https://localhost:8080/comments`
+
+    ```
+     {
+      "product": "5c70da4df6020c1b84859707",
+      "author": "5c7d8e6b084fa923607d56d1",
+      "text": "This pizza was the best",
+      "mark": 5,
+     }
+    ```
+
+    **Получение коментария**
+
+    - `GET https://localhost:8080/comments/?productId="5c70da4df6020c1b84859707"&token=<token>`
