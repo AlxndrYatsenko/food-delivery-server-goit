@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { createIngredient } = require("./controllers/ingredients");
 const mainRoute = require("./controllers/main/main");
+const verifyToken = require("./models/middleware/check-token");
 
 const { createOrder, getOrderById } = require("./controllers/orders");
 const { createComment, getCommentById } = require("./controllers/сomments");
@@ -10,17 +11,17 @@ const {
   productsRoute,
   getProductById,
   updateProduct,
-  createProduct
+  createProduct,
 } = require("./controllers/products");
 
 router
   .get("/", mainRoute)
 
-  .get("/auth/logout", logout)
   .post("/auth/login", login)
+  .use(verifyToken)
+  .post("/auth/logout", logout)
   .post("/auth/current", getCurrent)
   .post("/auth/register", register)
-  // .post("/users", createUser)
 
   .post("/ingredients", createIngredient)
 

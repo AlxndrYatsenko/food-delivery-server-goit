@@ -3,7 +3,7 @@ const User = require("../../../models/schemas/user");
 const {
   sendSuccess,
   sendNotFound,
-  sendError
+  sendError,
 } = require("../../../servises/send");
 
 const current = (req, res) => {

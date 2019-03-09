@@ -1,0 +1,21 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": "standard",
+  "rules": {
+    "semi": ["error", "always"],
+    "camelcase": "off",
+    "comma-dangle": "off",
+    "indent": ["error", 2],
+    "quotes": ["error", "double"],
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": false
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const timestamp = require("../middleware/timestamp");
+const timestamp = require("../middleware/time-stamp");
 
 const orderSchema = new Schema(
   {
@@ -8,11 +8,11 @@ const orderSchema = new Schema(
     deliveryType: String,
     deliveryAdress: String,
     sumToPay: Number,
-    status: String
+    status: String,
   },
   {
-    timestamps: true
-  }
+    timestamps: true,
+  },
 );
 
 orderSchema.plugin(timestamp);

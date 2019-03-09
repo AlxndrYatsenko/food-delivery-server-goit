@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const timestamp = require("../middleware/timestamp");
+const timestamp = require("../middleware/time-stamp");
 
 const productSchema = new Schema(
   {
@@ -12,11 +12,11 @@ const productSchema = new Schema(
     creatorId: String,
     categories: Array,
     likes: Number,
-    ingredients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }]
+    ingredients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }],
   },
   {
-    timestamps: true
-  }
+    timestamps: true,
+  },
 );
 
 productSchema.plugin(timestamp);

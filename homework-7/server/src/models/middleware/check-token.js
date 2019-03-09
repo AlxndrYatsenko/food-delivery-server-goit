@@ -1,17 +1,16 @@
-const app = require("./app");
 const jwt = require("jsonwebtoken");
+const { secretKey } = require("../../../config");
 
 const getToken = req =>
   req.body.token || req.query.token || req.headers["x-access-token"];
 
 const checkToken = (req, res, next) => {
   const token = getToken(req);
-  const secretKey = app.get("superSecret");
 
   if (!token) {
     return res.status(403).send({
       success: false,
-      message: "No token provided."
+      message: "No token provided.",
     });
   }
 
@@ -19,7 +18,7 @@ const checkToken = (req, res, next) => {
     if (err) {
       return res.json({
         success: false,
-        message: "Failed to authenticate token."
+        message: "Failed to authenticate token.",
       });
     }
 

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const timestamp = require("../middleware/timestamp");
+const timestamp = require("../middleware/time-stamp");
 
 const userSchema = new Schema(
   {
@@ -13,11 +13,11 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     favoriteProducts: Array,
     viewedProducts: Array,
-    orders: Array
+    orders: Array,
   },
   {
-    timestamps: true
-  }
+    timestamps: true,
+  },
 );
 
 userSchema.plugin(timestamp);

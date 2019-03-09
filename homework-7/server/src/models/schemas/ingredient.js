@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const timestamp = require("../middleware/timestamp");
+const { timeStamp } = require("../middleware");
 
 const ingredientSchema = new Schema(
   {
     name: String,
-    description: String
+    description: String,
   },
   {
-    timestamps: true
-  }
+    timestamps: true,
+  },
 );
 
-ingredientSchema.plugin(timestamp);
+ingredientSchema.plugin(timeStamp);
 
 const Ingredient = mongoose.model("Ingredient", ingredientSchema);
 
