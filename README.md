@@ -42,6 +42,7 @@
     	"password": "password",
     	"email":"tesla@mail.com"
      }
+     
     	 ```
 
 2.  Ingredients
