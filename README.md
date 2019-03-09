@@ -5,6 +5,7 @@
     **Логин**
 
     - `POST https://localhost:8080/auth/login`
+    
 
     ```
     {
@@ -23,17 +24,18 @@
 
 
     ```
-
-    	 {"token": "token"	}
-
-
+    	 {
+       "token": "token"
+       }
     	 ```
 
     **Регистрация текущего пользователя**
 
     - `POST https://localhost:8080/register`
+    
 
     ```
+    
      {
     	"firstName": "Elon",
     	"lastName": "Musk",
@@ -50,6 +52,7 @@
     **Добавление ингридиента для товара**
 
     - `POST https://localhost:8080/ingredients`
+    
 
     ```
      {
@@ -63,6 +66,7 @@
     **Создание коментария**
 
     - `POST https://localhost:8080/comments`
+    
 
     ```
      {
