@@ -6,6 +6,7 @@
 
     - `POST https://localhost:8080/auth/login`
     
+    
 
     ```
     {
@@ -33,10 +34,7 @@
 
     - `POST https://localhost:8080/register`
     
-
-    ```
-    
-     {
+    ``` {
     	"firstName": "Elon",
     	"lastName": "Musk",
     	"phone": "333333333333333",
@@ -54,8 +52,7 @@
     - `POST https://localhost:8080/ingredients`
     
 
-    ```
-     {
+    ``` {
       "name": "tomato",
       "description": "Some vegitable"
      }
