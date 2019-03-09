@@ -5,6 +5,8 @@
     **Логин**
 
     - `POST https://localhost:8080/auth/login`
+    
+    
 
     ```
     {
@@ -23,18 +25,17 @@
 
 
     ```
-
-    	 {"token": "token"	}
-
-
-    	 ```
+      {
+       "token": "token"
+       }
+       ```
 
     **Регистрация текущего пользователя**
 
     - `POST https://localhost:8080/register`
-
-    ```
-     {
+    
+    ``` 
+    {
     	"firstName": "Elon",
     	"lastName": "Musk",
     	"phone": "333333333333333",
@@ -43,16 +44,16 @@
     	"password": "password",
     	"email":"tesla@mail.com"
      }
-    	 ```
-
+     
 2.  Ingredients
 
     **Добавление ингридиента для товара**
 
     - `POST https://localhost:8080/ingredients`
+    
 
-    ```
-     {
+    ``` 
+    {
       "name": "tomato",
       "description": "Some vegitable"
      }
@@ -63,6 +64,7 @@
     **Создание коментария**
 
     - `POST https://localhost:8080/comments`
+    
 
     ```
      {
