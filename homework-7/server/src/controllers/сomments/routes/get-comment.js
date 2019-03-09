@@ -1,4 +1,3 @@
-// const { URL } = require("url");
 const Comment = require("../../../models/schemas/сomment");
 const { sendSuccess, sendError } = require("../../../servises/send");
 
@@ -9,9 +8,9 @@ const getCommentById = (req, res) => {
   const id = getIdFromQuery(productId);
 
   Comment.find({ product: id })
-    .then(comment => {
-      return comment
-        ? sendSuccess(res, comment, "comments")
+    .then(comments => {
+      return comments
+        ? sendSuccess(res, comments, "comments")
         : sendSuccess(res, [], "comments");
     })
     .catch(error => sendError(res, error));

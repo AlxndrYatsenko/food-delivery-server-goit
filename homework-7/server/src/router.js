@@ -18,10 +18,10 @@ router
   .get("/", mainRoute)
 
   .post("/auth/login", login)
+  .post("/auth/register", register)
   .use(verifyToken)
   .post("/auth/logout", logout)
-  .post("/auth/current", getCurrent)
-  .post("/auth/register", register)
+  .get("/auth/current", getCurrent)
 
   .post("/ingredients", createIngredient)
 
