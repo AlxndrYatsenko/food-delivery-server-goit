@@ -52,7 +52,8 @@
     - `POST https://localhost:8080/ingredients`
     
 
-    ``` {
+    ``` 
+    {
       "name": "tomato",
       "description": "Some vegitable"
      }
