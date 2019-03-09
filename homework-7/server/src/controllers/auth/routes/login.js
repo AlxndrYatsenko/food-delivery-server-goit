@@ -18,7 +18,7 @@ const sendToken = (res, token) =>
 
 const generateToken = paramsForTokenGeneration => {
   return jwt.sign(paramsForTokenGeneration, secretKey, {
-    expiresIn: 60,
+    expiresIn: 60 * 60 * 24,
   });
 };
 

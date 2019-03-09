@@ -21,7 +21,6 @@ const checkToken = (req, res, next) => {
         message: "Failed to authenticate token.",
       });
     }
-
     req.decoded = decoded;
     next();
   });
