@@ -7,7 +7,9 @@ const {
 } = require("../../../servises/send");
 
 const current = (req, res) => {
-  const { token } = req.body;
+  const token =
+    req.body.token || req.query.token || req.headers["x-access-token"];
+
   const userId = jwt.decode(token).userId;
   User.findById(userId)
     .then(user => (user ? sendSuccess(res, user, "user") : sendNotFound(res)))

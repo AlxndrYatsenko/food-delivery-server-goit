@@ -20,7 +20,7 @@ router
   .post("/auth/login", login)
   .post("/auth/register", register)
   .use(verifyToken)
-  .post("/auth/logout", logout)
+  .get("/auth/logout", logout)
   .get("/auth/current", getCurrent)
 
   .post("/ingredients", createIngredient)
